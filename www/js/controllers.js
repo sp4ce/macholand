@@ -1,6 +1,6 @@
 angular.module('macholand.controllers', [])
 
-.controlller('AboutCtrl', function($scope) {})
+.controller('AboutCtrl', function($scope) {})
 
 .controller('CameraCtrl', function($scope) {
 //    $scope.takePic = function() {
