@@ -31,9 +31,10 @@ angular.module('macholand', ['ionic', 'macholand.controllers', 'macholand.servic
 
     // setup an abstract state for the tabs directive
     .state('tab', {
-        url: "/tab",
+        url: '/tab',
         abstract: true,
-        templateUrl: "templates/tabs.html"
+        templateUrl: 'templates/tabs.html',
+        controller: 'TabsCtrl'
     })
 
     // Each tab has its own nav history stack:

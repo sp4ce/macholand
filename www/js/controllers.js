@@ -1,8 +1,24 @@
 angular.module('macholand.controllers', [])
 
+.controller('TabsCtrl', function($scope) {
+    $scope.startCamera = function() {
+        if (navigator.camera) {
+            navigator.camera.getPicture(onSuccess, onFail, {
+                quality: 50,
+                destinationType: Camera.DestinationType.FILE_URI,
+                sourceType: 1,
+                encodingType: 0
+            });
+        } else {
+            alert('no camera');
+        }
+    };
+})
+
 .controller('AboutCtrl', function($scope) {})
 
 .controller('CameraCtrl', function($scope) {
+
 //    $scope.takePic = function() {
 //        navigator.camera.getPicture(onSuccess, onFail, {
 //            quality: 50,
