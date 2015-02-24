@@ -1,57 +1,40 @@
 angular.module('macholand.controllers', [])
 
-.controller('TabsCtrl', function($scope) {
-    $scope.startCamera = function() {
-        if (navigator.camera) {
-            navigator.camera.getPicture(onSuccess, onFail, {
-                quality: 50,
-                destinationType: Camera.DestinationType.FILE_URI,
-                sourceType: 1,
-                encodingType: 0
-            });
-        } else {
-            alert('no camera');
-        }
-    };
-})
+// The tabs controller, when the tabs are display.
+.controller('TabsCtrl', ['$scope', '$rootScope', 'Camera', function($scope, $rootScope, Camera) {
 
+    $scope.startCamera = function() {
+        // if the camera is not defined, wair the devide reader event.
+        if (!Camera.isReady()) {
+            document.addEventListener("deviceready", function() {
+                $scope.startCamera();
+            }, false);
+            return;
+        }
+
+        // Take the picture.
+        Camera.getPicture({
+            quality: 50,
+            destinationType: 1, // Camera.DestinationType.FILE_URI,
+            sourceType: 1, // Camera.PictureSourceType.CAMERA,
+            encodingType: 0, // Camera.EncodingType.JPEG,
+        }).then(function(imageURI) {
+            // Emit event to tell that a picture was taken.
+            $rootScope.$emit('picture', imageURI);
+        }, function(err) {
+            console.err(err);
+        });
+    };
+}])
+
+// About controller, nothing special here.
 .controller('AboutCtrl', function($scope) {})
 
-.controller('CameraCtrl', function($scope) {
+// The camera controller, to display the taken image and send it.
+.controller('CameraCtrl', ['$scope', '$rootScope', function($scope, $rootScope) {
 
-//    $scope.takePic = function() {
-//        navigator.camera.getPicture(onSuccess, onFail, {
-//            quality: 50,
-//            destinationType: Camera.DestinationType.FILE_URI,
-//            sourceType: 1,
-//            encodingType: 0
-//        });
-//    }
-//
-//    var onSuccess = function(FILE_URI) {
-//        console.log(FILE_URI);
-//        $scope.picData = FILE_URI;
-//        $scope.$apply();
-//    };
-//
-//    var onFail = function(e) {
-//        console.log("On fail " + e);
-//    }
-//
-//    $scope.send = function() {
-//        var myImg = $scope.picData;
-//        var options = new FileUploadOptions();
-//        options.fileKey="post";
-//        options.chunkedMode = false;
-//        var params = {};
-//        params.user_token = localStorage.getItem('auth_token');
-//        params.user_email = localStorage.getItem('email');
-//        options.params = params;
-//        var ft = new FileTransfer();
-//        ft.upload(
-//            myImg,
-//            encodeURI("https://example.com/posts/"),
-//            onUploadSuccess, onUploadFail, options);
-//    }
-})
+    $rootScope.$on('picture', function(e, imageURI) {
+        $scope.picture = imageURI;
+    });
+}])
 ;
