@@ -22,10 +22,28 @@
     font-size: 25pt;
 }
 
-.tab-camera .send {
+.tab-camera .send button {
     margin: auto;
     display: inherit;
     margin-top: 2%;
     width: 50%;
     height: 50px;
+}
+
+.tab-camera .send img {
+    margin: auto;
+    display: inherit;
+    margin-top: 2%;
+    width: 32px;
+    height: 32px;
+}
+
+.tab-camera .send p {
+    margin: auto;
+    display: inherit;
+    margin-top: 2%;
+    width: 90%;
+    text-align: center;
+    height: 32px;
+    font-size: 25pt;
 }

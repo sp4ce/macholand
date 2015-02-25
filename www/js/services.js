@@ -21,10 +21,11 @@ angular.module('macholand.services', [])
                 sourceType: 1, // Camera.PictureSourceType.CAMERA,
                 encodingType: 0, // Camera.EncodingType.JPEG,
             }).then(function(imageURI) {
+
                 // Emit event to tell that a picture was taken.
                 $scope.$emit('picture', imageURI);
             }, function(err) {
-                console.err(err);
+                console.log(err);
             });
         },
 
@@ -55,32 +56,36 @@ angular.module('macholand.services', [])
     };
 }])
 
-.factory('Mailer', function() {
+.factory('Mailer', ['$q', function($q) {
     return {
-        send: function() {
-            var nodemailer = require('nodemailer');
-            var smtpTransport = nodemailer.createTransport('SMTP', {
-                service: 'Gmail',
-                auth: {
-                    user: 'pernetmu@gmail.com',
-                    pass: 'looping1009',
-                }
-            });
+        send: function(imageURI, comment) {
+            // Remove the protocol part of the URI to have only the path.
+            var attachment = imageURI.replace('file://', '');
 
-            smtpTransport.sendMail({
-                from: 'noreply@macholand.com', // sender address
-                to: 'pernetmu@gmail.com', // comma separated list of receivers
-                subject: 'Mail from Nodemailer', // Subject line
-                text: 'Hello world  - this mail is sent from nodemailer library' // plaintext body
-            }, function(error, response) {
-                if(error) {
-                    console.err(error);
-                } else {
-                    console.log('Mail sent: ' + response.message);
-                }
-            });
+            // Create the calback handler.
+            var q = $q.defer();
+
+            // This mailer works by allowing several thing in gmail
+            // https://accounts.google.com/b/0/DisplayUnlockCaptcha
+            // https://www.google.com/settings/security/lesssecureapps
+            sendmail.send(
+                function() {
+                    q.resolve();
+                },
+                function(error) {
+                    q.reject(error);
+                },
+                '[MachoLand] New photo from the app',
+                comment,
+                'macholandapp@gmail.com', 'geronimo132790',
+                'bapt@sp4ce.net', // Destination
+                attachment
+            );
+
+            // Return tthe promise on the callback handler.
+            return q.promise;
         },
     };
-})
+}])
 
 ;

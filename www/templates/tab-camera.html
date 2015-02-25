@@ -2,11 +2,16 @@
     <ion-content class="padding">
         <button class="change" ng-click="startCamera()">Changer de photo</button>
         <div class="picture">
-            <img src="{{picture}}" />
+            <img src="{{photo.uri}}" />
         </div>
         <div class="textarea">
-            <textarea placeholder="Commentaire (optionnel)"></textarea>
+            <textarea placeholder="Commentaire (optionnel)" ng-model="photo.comment"></textarea>
         </div>
-        <button class="send" ng-click="send()" ng-show="sendVisible">Send</button>
+        <div class="send">
+            <button ng-click="send()" ng-show="sendVisible">Send</button>
+            <img src="img/ajax-loader.gif" ng-show="loaderVisible" />
+            <p ng-show="confirmationVisible">Photo envoyée, merci.</p>
+            <p ng-show="errorVisible">Erreur dans l'envoi.</p>
+        </div>
     </ion-content>
 </ion-view>

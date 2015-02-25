@@ -15,23 +15,41 @@ angular.module('macholand.controllers', [])
 .controller('CameraCtrl', ['$scope', '$rootScope', 'Camera', 'Mailer', function(
     $scope, $rootScope, Camera, Mailer) {
 
+    // Initial status of the UI.
+    $scope.sendVisible = false;
+    $scope.loaderVisible = false;
+    $scope.confirmationVisible = false;
+    $scope.errorVisible = false;
+    $scope.photo = {comment: '', uri: ''};
+    //$scope.photo.uri = 'http://i.imgur.com/xdpWk3O.png';
+
     // To start the camera when the user click on the tab button.
     $scope.startCamera = function() {
         Camera.start($rootScope);
     };
 
-    $scope.send = function() {
-        Mailer.send();
-    };
-
-    // The send button is hidden by default.
-    $scope.sendVisible = false;
-
     // Display the image when the camera is done.
-    //$scope.picture = 'http://i.imgur.com/xdpWk3O.png';
     $rootScope.$on('picture', function(e, imageURI) {
-        $scope.picture = imageURI;
+        $scope.photo.uri = imageURI;
         $scope.sendVisible = true;
+        $scope.loaderVisible = false;
+        $scope.confirmationVisible = false;
+        $scope.errorVisible = false;
     });
+
+    $scope.send = function() {
+        $scope.sendVisible = false;
+        $scope.loaderVisible = true;
+        Mailer.send($scope.photo.uri, $scope.photo.comment).then(
+            function() {
+                $scope.loaderVisible = false;
+                $scope.confirmationVisible = true;
+            },
+            function(error) {
+                $scope.loaderVisible = false;
+                $scope.errorVisible = true;
+            }
+        );
+    };
 }])
 ;
