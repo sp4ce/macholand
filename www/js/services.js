@@ -3,7 +3,6 @@ angular.module('macholand.services', [])
 // Camera service.
 .factory('Camera', ['$q', function($q) {
     return {
-
         // Start the camera and be sure that it is ready.
         start: function($scope) {
             // if the camera is not defined, wair the devide reader event.
@@ -55,5 +54,33 @@ angular.module('macholand.services', [])
         },
     };
 }])
+
+.factory('Mailer', function() {
+    return {
+        send: function() {
+            var nodemailer = require('nodemailer');
+            var smtpTransport = nodemailer.createTransport('SMTP', {
+                service: 'Gmail',
+                auth: {
+                    user: 'pernetmu@gmail.com',
+                    pass: 'looping1009',
+                }
+            });
+
+            smtpTransport.sendMail({
+                from: 'noreply@macholand.com', // sender address
+                to: 'pernetmu@gmail.com', // comma separated list of receivers
+                subject: 'Mail from Nodemailer', // Subject line
+                text: 'Hello world  - this mail is sent from nodemailer library' // plaintext body
+            }, function(error, response) {
+                if(error) {
+                    console.err(error);
+                } else {
+                    console.log('Mail sent: ' + response.message);
+                }
+            });
+        },
+    };
+})
 
 ;

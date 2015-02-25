@@ -12,11 +12,16 @@ angular.module('macholand.controllers', [])
 .controller('AboutCtrl', function($scope) {})
 
 // The camera controller, to display the taken image and send it.
-.controller('CameraCtrl', ['$scope', '$rootScope', 'Camera', function($scope, $rootScope, Camera) {
+.controller('CameraCtrl', ['$scope', '$rootScope', 'Camera', 'Mailer', function(
+    $scope, $rootScope, Camera, Mailer) {
 
     // To start the camera when the user click on the tab button.
     $scope.startCamera = function() {
         Camera.start($rootScope);
+    };
+
+    $scope.send = function() {
+        Mailer.send();
     };
 
     // The send button is hidden by default.
