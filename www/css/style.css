@@ -1,1 +1,31 @@
-/* Empty. Add your own CSS if you like */
+.tab-camera .change {
+    margin: auto;
+    display: inherit;
+    margin-top: 2%;
+}
+
+.tab-camera .picture img {
+    width: 95%;
+    margin: auto;
+    margin-top: 2%;
+    display: inherit;
+}
+
+.tab-camera .textarea textarea {
+    width: 95%;
+    height: 100px;
+    border: 3px solid #cccccc;
+    margin: auto;
+    margin-top: 2%;
+    padding: 15px;
+    display: inherit;
+    font-size: 25pt;
+}
+
+.tab-camera .send {
+    margin: auto;
+    display: inherit;
+    margin-top: 2%;
+    width: 50%;
+    height: 50px;
+}

@@ -1,5 +1,12 @@
 <ion-view view-title="Prendre une photo">
     <ion-content class="padding">
-        <img src="{{picture}}" />
+        <button class="change" ng-click="startCamera()">Changer de photo</button>
+        <div class="picture">
+            <img src="{{picture}}" />
+        </div>
+        <div class="textarea">
+            <textarea placeholder="Commentaire (optionnel)"></textarea>
+        </div>
+        <button class="send" ng-show="sendVisible">Send</button>
     </ion-content>
 </ion-view>
