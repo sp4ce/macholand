@@ -20,6 +20,7 @@ angular.module('macholand.services', [])
                 destinationType: 1, // Camera.DestinationType.FILE_URI,
                 sourceType: 1, // Camera.PictureSourceType.CAMERA,
                 encodingType: 0, // Camera.EncodingType.JPEG,
+                correctOrientation: true,
             }).then(function(imageURI) {
 
                 // Emit event to tell that a picture was taken.

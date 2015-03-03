@@ -2,9 +2,9 @@
 <widget id="com.ionicframework.macholand" version="0.9.1"
     xmlns="http://www.w3.org/ns/widgets"
     xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>MachoLand</name>
+    <name>MachoCam</name>
     <description>
-        An Ionic Framework and Cordova project.
+        Une application qui permet de dénoncer le sexisme ordinaire.
     </description>
     <author email="bapt@sp4ce.net" href="http://www.macholand.fr/">
       Baptiste Pernet
@@ -17,8 +17,5 @@
     <preference name="BackupWebStorage" value="none"/>
     <feature name="StatusBar">
         <param name="ios-package" value="CDVStatusBar" onload="true"/>
-    </feature>
-    <feature name="Camera">
-        <param name="android-package" value="org.apache.cordova.camera.CameraLauncher" />
     </feature>
 </widget>
