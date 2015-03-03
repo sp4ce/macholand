@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'macholand.services' is found in services.js
 // 'macholand.controllers' is found in controllers.js
-angular.module('macholand', ['ionic', 'macholand.controllers', 'macholand.services'])
+angular.module('macholand', ['ionic', 'macholand.controllers', 'macholand.services', 'macholand.config'])
 
 .run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {

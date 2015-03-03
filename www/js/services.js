@@ -57,7 +57,7 @@ angular.module('macholand.services', [])
     };
 }])
 
-.factory('Mailer', ['$q', function($q) {
+.factory('Mailer', ['$q', 'STATIC', function($q, STATIC) {
     return {
         send: function(imageURI, comment) {
             // Remove the protocol part of the URI to have only the path.
@@ -78,8 +78,8 @@ angular.module('macholand.services', [])
                 },
                 '[MachoLand] New photo from the app',
                 comment,
-                'macholandapp@gmail.com', 'geronimo132790',
-                'bapt@sp4ce.net', // Destination
+                STATIC.GMAIL_ACCOUNT, STATIC.GMAIL_ACCOUNT_PASSWORD,
+                STATIC.PHOTO_EMAIL,
                 attachment
             );
 

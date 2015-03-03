@@ -20,6 +20,28 @@ To build the icon of the application we use the application `cordova-icon`
 
     sudo npm install cordova-icon -g
 
+# Configuration
+
+## Configuration file
+
+The configuration of the application itself is done in the file `www/js/config.js`. It the
+file doesn't exist, copy the file `config.template.js` and fill it with the
+right values
+
+ - `GMAIL_ACCOUNT`: The GMail account used to send the email.
+ - `GMAIL_ACCOUNT_PASSWORD`: The password of the GMail account.
+ - `PHOTO_EMAIL`: The email where to send the photos.
+
+## GMail account configuration
+
+In order to be able to send an email, you need to activate some parameters in the GMail account. First you need to unlock your account and then activate the less secure application.
+
+     - https://accounts.google.com/b/0/DisplayUnlockCaptcha
+     - https://www.google.com/settings/security/lesssecureapps
+
+Also, because you need to hard code the password in the code and deactivate basic
+security on the GMail account, it is strongly advised to create a dedicated
+GMail account to send email.
 
 # Run on android
 
